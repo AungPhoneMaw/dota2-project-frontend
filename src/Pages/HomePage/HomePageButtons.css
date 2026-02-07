@@ -1,0 +1,35 @@
+.button-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button-container button{
+  margin:15px;
+  width :50vw;
+  padding: 20px;
+  background: radial-gradient(rgb(from var(--accent) r g b /0.1), rgb(from var(--surface) r g b /0.5), rgb(from var(--bg) r g b /0.7));
+  background-color: rgb(from var(--accent) r g b/ 0.2);
+  border: none;
+  border-radius: 5px;
+  box-shadow : 5px 5px 10px rgb(from var(--bg) r g b / 0.5);
+  font-family: 'UnifrakturCook', cursive;
+  font-size:2rem;
+  font-weight: 700;
+  color :var(--text-primary);
+  transition: 2s;
+}
+
+.button-container button:active{
+  opacity: 0.5;
+  
+}
+
+@keyframes fade-out{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0.5;
+  }
+}

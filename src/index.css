@@ -1,0 +1,17 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=UnifrakturCook:wght@700&display=swap');
+
+
+:root {
+  --bg: #1A1026;
+  --surface: #2A1C3F;
+  --text-primary: #E6DBFF;
+  --text-secondary: #B8A9D9;
+  --accent: #F2C94C;
+  --border: #3A2C55;
+}
+body{
+  margin: 0;
+  background: url(./assets/shared/background.jpg) center center/cover;
+  height: 100vh;
+}
