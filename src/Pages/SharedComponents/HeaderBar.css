@@ -1,17 +1,19 @@
-.top-bar-container{
+.header-bar-container{
+  justify-self: flex-start;
   display: flex;
+  margin: 0 ;
   background: linear-gradient(to bottom, var(--surface), transparent);
   position: relative;
   width: 100%;
   max-height: 10vh;
   border: none;
-  box-shadow: 0 0 2px var(--bg);
+  box-shadow:inset 0 2px 4px var(--bg);
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.top-bar-container .page-title{
+.header-bar-container .page-title{
   font-family: 'UnifrakturCook', cursive;
   filter: drop-shadow(1px 1px 1px black);
   font-size: 2rem;
@@ -19,7 +21,7 @@
   color: var(--text-secondary);
 }
 
-.top-bar-container .icon-container{
+.header-bar-container .icon-container{
   position: absolute;
   right:10px;
   background: transparent;
@@ -31,8 +33,8 @@
   
 }
 
-.top-bar-container .icon-container::before,
-.top-bar-container .icon-container::after{
+.header-bar-container .icon-container::before,
+.header-bar-container .icon-container::after{
   content: "";
   z-index:-10;
   padding: 1px;
@@ -49,7 +51,7 @@
   animation: spin 2s ease infinite;
 }
 
-.top-bar-container .icon-container::before{
+.header-bar-container .icon-container::before{
   padding:2px;
   opacity: 0.5;
   filter: blur(2rem);
@@ -66,7 +68,7 @@
   background: radial-gradient(closest-corner circle at bottom, white , transparent);
 }*/
 
-.top-bar-container .icon-container 
+.header-bar-container .icon-container 
 img{
   aspect-ratio: 1/1;
   width :5vh;

@@ -3,15 +3,40 @@
 
 
 :root {
+  /*BACKGROUND COLORS*/
   --bg: #1A1026;
+  --bg-deeper: #140B1F;   
   --surface: #2A1C3F;
+  --surface-deep: #211533;    /* cards behind cards */
+  --surface-alt: #332350;
+  --surface-soft: #3E2D63;
+  /*TEXT COLORS*/
   --text-primary: #E6DBFF;
   --text-secondary: #B8A9D9;
+  --text-muted: #9A8BBC;      /* less important text */
+  --text-disabled: #6F628E;   /* disabled states */
+  --text-highlight: #F3EDFF;  /* headers / emphasis */
+ /*ACCENTS COLORS*/
   --accent: #F2C94C;
+  --accent-soft: #EAD17A;     /* hover / subtle accents */
+  --accent-strong: #FFD966;  /* CTA / focus */
+  --accent-dim: #C9A63A;     /* inactive accent */
+
+  /*BORDER COLORS*/
   --border: #3A2C55;
+  --border-soft: #4A3A6A;
+  --border-strong: #5C4A84;
+
+  /*MISCEN*/
+  --overlay: #100916;  
+  --info: #7AA2F7;    /* links, info badges */
+  --success: #9ECE6A; /* success states */
+  --danger: #F7768E;  /* errors */
 }
 body{
   margin: 0;
-  background: url(./assets/shared/background.jpg) center center/cover;
+  background: linear-gradient(to bottom, var(--bg),var(--surface),var(--surface-deep),
+  var(--surface),var(--bg));
+  scrollbar-width: none;
   height: 100vh;
 }

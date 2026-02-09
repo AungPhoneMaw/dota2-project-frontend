@@ -4,17 +4,19 @@
 }
 .hero-image-attr-grid{
   margin : 20px;
+  padding: 20PX;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(10px, 40px));
   gap: 4px;
   align-content: start;
+
   
 }
 
 .hero-attr-container .attr-bar{
   display: flex;
   filter: drop-shadow(2px 2px 2px black);
-  padding-left :10px;
+  padding-left :30px;
   flex-direction: row;
   text-align: center;
   justify-content: flex-start;

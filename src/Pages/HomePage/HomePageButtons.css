@@ -6,12 +6,13 @@
 }
 .button-container button{
   margin:15px;
-  width :50vw;
+  width :30vw;
   padding: 20px;
-  background: radial-gradient(rgb(from var(--accent) r g b /0.1), rgb(from var(--surface) r g b /0.5), rgb(from var(--bg) r g b /0.7));
+  background: radial-gradient(rgb(from var(--accent) r g b /0.1), 
+  rgb(from var(--surface) r g b /0.5), rgb(from var(--surface) r g b /0.8));
   background-color: rgb(from var(--accent) r g b/ 0.2);
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   box-shadow : 5px 5px 10px rgb(from var(--bg) r g b / 0.5);
   font-family: 'UnifrakturCook', cursive;
   font-size:2rem;
