@@ -1,8 +1,10 @@
+import "../ComponentsStyle/HeroProfileImage.css"
+
 export function HeroProfileImage({heroName}) {
     return(
         <div className = "hero-profile-image-container">
             <img className = "hero-profile-image" src = {
-                `https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`
+                `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/heroes/${heroName}_vert.jpg`
 
             }/>
         </div>

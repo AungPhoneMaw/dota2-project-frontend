@@ -1,5 +1,6 @@
 import axios from "axios";
 import { use, useEffect, useState } from "react";
+import "../ComponentsStyle/TextArea.css"
 
 export function TextArea({heroName}){
     const apiLink = "https://api.opendota.com/api/constants/hero_lore";

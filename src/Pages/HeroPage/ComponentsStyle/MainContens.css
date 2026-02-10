@@ -1,0 +1,9 @@
+.main-contents-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "box-1 box-2 box-2 box-2 box-2"
+                         "box-3 box-3 box-3 box-3 box-3";
+    gap : 1em;
+    padding:10px;
+}
