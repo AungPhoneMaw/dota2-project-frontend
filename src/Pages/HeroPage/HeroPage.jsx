@@ -8,10 +8,10 @@ export function HeroPage() {
   const { heroName } = useParams();
 
   return (
-    <>
+    <div className ="hero-page-container">
       <HeaderBar title = {heroData.find(hero => hero.name === `npc_dota_hero_${heroName}`).localized_name}/>
       <MainContents heroName = {heroName}/>
-    </>
+    </div>
     
   )
 }

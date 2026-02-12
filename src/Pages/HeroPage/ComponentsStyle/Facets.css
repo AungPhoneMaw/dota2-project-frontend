@@ -1,0 +1,16 @@
+.facets-container{
+    display : flex;
+    flex-direction: row;
+    gap : 1em;
+    border: solid black 1px; border-radius: 5px;
+    padding: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.facet-container{
+    display: block;
+    border: solid black 1px;
+    border-radius: 5px;
+    padding: 5px;;
+}

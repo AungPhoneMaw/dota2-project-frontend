@@ -1,6 +1,7 @@
 import { HeroProfileImage } from "./HeroProfileImage";
 import { TextArea} from "./TextArea";
 import {AbilitiesBox } from "./AbilitiesBox";
+import {Facets} from "./Facets";
 import "../ComponentsStyle/MainContens.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -28,9 +29,18 @@ export function MainContents({heroName}){
 
     return(
         <div className="main-contents-container">
-            <div style={{gridArea: "box-1"}}><HeroProfileImage heroName = {heroName}/></div>
-            <div style={{gridArea: "box-2"}}><TextArea heroName = {heroName}/></div>
-            <div style={{gridArea: "box-3"}}><AbilitiesBox heroName = {heroName} abilities = {abilities}/></div>
+            <div style={{gridArea: "box-1"}}>
+                <HeroProfileImage heroName = {heroName}/>
+            </div>
+            <div style={{gridArea: "box-2"}}>
+                <TextArea heroName = {heroName}/>
+            </div>
+            <div style={{gridArea: "box-3"}}>
+                <AbilitiesBox heroName = {heroName} abilities = {abilities}/>
+            </div>
+            <div style={{gridArea: "box-4"}}>
+                <Facets heroName = {heroName} facets={facets}/>
+            </div>
         </div>
     )
 }

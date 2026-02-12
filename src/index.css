@@ -37,6 +37,8 @@ body{
   margin: 0;
   background: linear-gradient(to bottom, var(--bg),var(--surface),var(--surface-deep),
   var(--surface),var(--bg));
+  overflow: auto;
   scrollbar-width: none;
   height: 100vh;
 }
+body::-webkit-scrollbar{ display: none; }
