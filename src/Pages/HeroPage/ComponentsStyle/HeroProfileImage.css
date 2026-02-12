@@ -2,7 +2,7 @@
     width: 100%;
     aspect-ratio: 3/4;
     border: solid 1px black;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .hero-profile-image-container img{
@@ -10,5 +10,5 @@
     width: 100%;
     object-fit: fill;
     display: block;
-    border-radius: 10px;
+    border-radius: 15px;
 }
