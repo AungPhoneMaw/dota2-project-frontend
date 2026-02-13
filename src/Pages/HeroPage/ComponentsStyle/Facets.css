@@ -9,8 +9,32 @@
 
 }
 .facet-container{
-    display: block;
+    background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/facets/ripple_texture.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
     border: solid black 1px;
     border-radius: 5px;
     padding: 5px;;
 }
+
+.facet-container .facet-icon-container{
+    display: block;
+    border: solid black 1px;
+    aspect-ratio: 1/1;
+    width : 100%;
+
+
+}
+
+.facet-container .facet-icon-container .facet-icon{
+    object-fit: cover;
+}
+
+.facet-container .facet-title{
+    display: block;
+    font-size: 1rem;
+    border: solid black 1px;
+    margin: 0;
+}
+
