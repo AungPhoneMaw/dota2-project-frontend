@@ -19,15 +19,20 @@
 }
 
 .facet-container .facet-icon-container{
-    display: block;
+    display: flex;
     border: solid black 1px;
     aspect-ratio: 1/1;
     width : 100%;
+    justify-content: center;
+    align-items: center;
 
 
 }
 
 .facet-container .facet-icon-container .facet-icon{
+    border: solid black 1px;
+    aspect-ratio: 1/1;
+    width :32px;
     object-fit: cover;
 }
 
