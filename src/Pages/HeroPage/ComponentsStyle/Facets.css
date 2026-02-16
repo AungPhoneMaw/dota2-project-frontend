@@ -9,50 +9,70 @@
     align-items: stretch;
     grid-template-columns: auto auto auto;
 
-    
 
 }
+
 .facet-container{
-    opacity: 0.7;
+    position: relative;
     background-image: url("https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/facets/ripple_texture.png");
     background-size: cover;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px var(--bg);
+    filter: hue-rotate(-12deg);
     height: 60px;
     display: flex;
     text-align: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    border: solid black 1px;
-    border-radius: 10px;
-    padding: 5px;;
     object-fit: fill;
+    z-index: 1;
 }
+.facet-container::before{
+    content :"";
+    border-radius: 15px;
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
 
+}
 .facet-container .facet-icon-container{
     display: flex;
-    border: solid black 1px;
-    border-radius: 10px;
+    backdrop-filter: blur(500px);
     aspect-ratio: 1/1;
+    border-radius: 15px;
     justify-content: center;
     align-items: center;
+    box-shadow: 2px 2px 1px var(--bg),
+                inset 2px 2px 1px var(--text-primary);
 
 
 }
 
 .facet-container .facet-icon-container .facet-icon{
-    border: solid black 1px;
     aspect-ratio: 1/1;
-    width :32px;
+    width :40px;
+    border-radius: 15px;
     object-fit: cover;
 }
 
 .facet-container .facet-title{
     display: flex;
+    position: relative;
     white-space: nowrap;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-size: 2rem;
-    border: solid black 1px;
     margin: 0 auto;
+    padding : 10px;
+    width: 100%;
+    color : white;
+}
+
+.facet-container .facet-title::after{
+    position: absolute;
+    content: "";
+
 }
 

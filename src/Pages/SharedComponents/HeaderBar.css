@@ -2,7 +2,7 @@
   justify-self: flex-start;
   display: flex;
   margin: 0 ;
-  background: linear-gradient(to bottom, var(--bg-deeper), rgba(from var(--bg) r g b / 0.1));
+  background: linear-gradient(to bottom,black, transparent);
   position: relative;
   width: 100%;
   max-height: 10vh;

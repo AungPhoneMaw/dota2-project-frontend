@@ -1,8 +1,7 @@
 .text-area-container{
     background-image: linear-gradient(black, transparent);
     opacity: 0.8;
-    height: 92.4%;
-    border: solid black 1px;
+    height: 95%;
     border-radius: 15px;
     color :var(--text-primary);
     padding : 10px;
