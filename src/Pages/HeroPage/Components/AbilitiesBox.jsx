@@ -2,10 +2,17 @@ import axios from 'axios';
 import { use, useEffect, useState, Fragment } from "react";
 import "../ComponentsStyle/AbilitiesBox.css"
 
-function AbilityTooltip({ability, title, desc}){
+function AbilityTooltip({heroName, ability, title, desc}){
 
     return(
         <div className="ability-tooltip-container">
+            <div className="tooltip-video-container">
+                <video autoPlay preload='auto' loop playsInline
+                poster={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.jpg` }>
+                    <source type="video/web" src={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.webm`} />
+                    <source type= "video/mp4" src={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.mp4`} />
+                </video>
+            </div>
             <div className="ability-tooltip-header-container">
                 <div className="ability-tooltip-icon-container">
                     <img src = {`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`} 
@@ -33,7 +40,7 @@ function InnateTooltip(){
 function AghanimTooltip(){
 
 }
-function AbilityImage({ability}){
+function AbilityImage({heroName, ability}){
     const [showTooltip, setShowTooltip] = useState(false);
     const apiLink = "https://api.opendota.com/api/constants/abilities";
     const [displayName, setDisplayName] = useState("");
@@ -52,7 +59,7 @@ function AbilityImage({ability}){
     <div key={ability} className = "image-container" 
     onMouseEnter={()=>{setShowTooltip(true)}} 
     onMouseLeave={()=>{setShowTooltip(false)}}>
-        { showTooltip && <AbilityTooltip ability={ability} title={displayName} 
+        { showTooltip && <AbilityTooltip heroName={heroName} ability={ability} title={displayName} 
         desc = {description}/>}
         <img src = {`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`} 
                         onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
@@ -72,7 +79,7 @@ export function AbilitiesBox({heroName, abilities}){
                     ability.includes("_cancel")?(
                         <Fragment key={ability}/>
                     ):(
-                        <AbilityImage ability={ability} key={ability} />    
+                        <AbilityImage heroName={heroName} ability={ability} key={ability} />    
                     )
                          
                 )
