@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {heroInnates} from '../../../assets/heroInnates'
+import { heroAghanim } from '../../../assets/heroAghanim';
 import { use, useEffect, useState, Fragment } from "react";
 import "../ComponentsStyle/AbilitiesBox.css"
 
@@ -57,8 +58,8 @@ function InnateTooltip({heroName}){
 
     useEffect(()=>{
         axios.get(apiLink).then((response)=>{
-            setTitle(response.data[innateName]["dname"])
-            setDesc(response.data[innateName]["desc"])
+            setTitle(response.data[innateName]["dname"]);
+            setDesc(response.data[innateName]["desc"]);
             
         })
 
@@ -72,10 +73,39 @@ function InnateTooltip({heroName}){
     )
 }
 
-function AghanimTooltip(){
+function ScepterTooltip({heroName}){
+    const abilityName = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_skill_name_nd"];
+    const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${abilityName}.png`;
+    const title = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_skill_name"];
+    const desc = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_desc"];
 
+
+
+    return(
+        <div className="ability-tooltip-container">
+            <BaseTooltipContainer icon = {icon} title={title} desc={desc} />
+
+        </div>
+    )
 }
 
+function ShardTooltip({heroName}){
+
+    const abilityName = heroAghanim[`npc_dota_hero_${heroName}`]["shard_skill_name_nd"];
+    const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${abilityName}.png`;
+    const title = heroAghanim[`npc_dota_hero_${heroName}`]["shard_skill_name"];
+    const desc = heroAghanim[`npc_dota_hero_${heroName}`]["shard_desc"];
+
+
+
+    return(
+        <div className="ability-tooltip-container">
+            <BaseTooltipContainer icon = {icon} title={title} desc={desc} />
+
+        </div>
+    )
+
+}
 //main components -->AbilityImage, AbilityImages
 
 function AbilityImage({heroName, ability}){
@@ -109,17 +139,23 @@ function AbilityImage({heroName, ability}){
 
 export function AbilitiesBox({heroName, abilities}){
     const [showInnateTooltip, setShowInnateTooltip] =  useState(false);
+    const [showScepterTooltip, setShowScepterTooltip] =  useState(false);
+    const [showShardTooltip, setShowShardTooltip] =  useState(false);
+
     return(
         <div className="abilities-box-container">
+            {/* Talent Treee */}
             <div className = "talent-tree image-container" >
                 <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg" />
             </div>
+            {/* Innate Ability */}
             <div className="innate-ability image-container"
             onMouseEnter={()=>{setShowInnateTooltip(true)}}
             onMouseLeave={()=>{setShowInnateTooltip(false)}}>
                 {showInnateTooltip && <InnateTooltip heroName={heroName}/>}
                 <img src="/shared/innate-abilityicon.png" />
             </div>
+            {/* Hero Abilities */}
             {abilities.map((ability)=>{
                 return(
                     ability.includes("_cancel")?(
@@ -130,11 +166,18 @@ export function AbilitiesBox({heroName, abilities}){
                          
                 )
             })}
+            {/* Aghanim scepter and shard */}
             <div className="image-container">
-                <div>
+                <div className='wrapper'
+                    onMouseEnter={()=>{setShowScepterTooltip(true)}}
+                    onMouseLeave={()=>{setShowScepterTooltip(false)}}>
+                    {showScepterTooltip && <ScepterTooltip heroName={heroName} />}
                     <img className = "scepter-icon" src = "https://www.opendota.com/assets/images/dota2/scepter_0.png"/>
                 </div>
-                <div>
+                <div className='wrapper' 
+                    onMouseEnter={()=>{setShowShardTooltip(true)}}
+                    onMouseLeave={()=>{setShowShardTooltip(false)}}>
+                    {showShardTooltip && <ShardTooltip heroName={heroName} />}
                     <img className = "shard-icon" src= "https://www.opendota.com/assets/images/dota2/shard_0.png"/>
                 </div>
             </div>

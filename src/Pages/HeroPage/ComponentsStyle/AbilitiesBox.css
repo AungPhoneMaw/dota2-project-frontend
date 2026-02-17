@@ -38,6 +38,9 @@
     transform: scale(0.95);
 }
 
+.wrapper{
+    position: relative;
+}
 
 /* Ability Box Tooltip */
 
