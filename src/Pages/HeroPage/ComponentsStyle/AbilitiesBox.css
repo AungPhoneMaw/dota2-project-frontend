@@ -1,6 +1,6 @@
 /* Ability Box  */
 
-
+/* hero abilities */
 .abilities-box-container{
     display: flex;
     width: 100%;
@@ -34,9 +34,10 @@
     height: 50%;
 }
 
-.abilities-box-container .image-container:hover img{
+.abilities-box-container .image-container img:hover{
     transform: scale(0.95);
 }
+
 
 /* Ability Box Tooltip */
 
@@ -44,7 +45,7 @@
 .ability-tooltip-container{
     z-index: 2;
     position : absolute;
-    width : 300px;
+    width : 400px;
     bottom: 130%;
     left : 0;
     display: flex;
@@ -52,12 +53,13 @@
     background-image: linear-gradient(to bottom, var(--bg-deeper),var(--surface-deep));
 }
 .ability-tooltip-container .tooltip-video-container{
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
 }
 
 .ability-tooltip-container .tooltip-video-container video{
-    width : 300px;
+    width : 400px;
+    object-fit: cover;
 }
 
 .ability-tooltip-container .ability-tooltip-header-container{
@@ -102,5 +104,19 @@
 }
 
 .ability-tooltip-container .ability-tooltip-description-container .ability-tooltip-description{
-    color : var(--text-primary)
+    color : var(--text-primary);
+    display : block;
+    margin : 0 auto;
+}
+
+.ability-tooltip-container .ability-tooltip-lore-container{
+    border: solid 4px var(--border);
+    background-image: linear-gradient(to right, var(--bg-deeper),transparent);
+    padding : 10px;
+}
+
+.ability-tooltip-container .ability-tooltip-lore-container .ability-tooltip-lore{
+    color : var(--text-muted);
+    display: block;
+    margin : 0 auto;
 }
