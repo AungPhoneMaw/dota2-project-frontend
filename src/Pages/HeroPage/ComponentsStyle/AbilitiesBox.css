@@ -123,3 +123,86 @@
     display: block;
     margin : 0 auto;
 }
+
+/* TALENT TREE */
+
+.talent-tree-tooltip-container{
+    z-index: 3;
+    background: linear-gradient(150deg, #68727C, #14171A);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    bottom: 130%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.talent-tree-tooltip-container .talent-tree-title{
+    display: flex;
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.talent-tree-tooltip-container .talent-tree-level{
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(150deg, #3c4247, #0a0c0e);;
+    margin: 5px 0;
+}
+
+.talent-tree-level .left-branch{
+    display: flex;
+    width : 200px;
+    color: var(--text-highlight);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.talent-tree-level .right-branch{
+    display: flex;
+   width : 200px;
+   color: var(--text-highlight);
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+}
+
+.talent-tree-level .level{
+    z-index: 0;
+    position: relative;
+    display: flex;
+    background: transparent;
+    color : var(--accent-strong);
+    text-shadow: 0px 0px 8px #ff531c    ;
+    min-width: 50px;
+    min-height: 50px;
+    font-size: 1.5rem;
+    letter-spacing: 1.7px;
+    font-weight: bolder;
+    border-radius: 50%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 2px 1px gray,
+                inset 0 0 8px 8px rgba(0,0,0,0.4);
+}
+
+.talent-tree-level .level::before{
+    content: "";
+    position: absolute;
+    z-index : -1;
+    top : -5px; left : -5px; right : -5px; bottom  : -5px;
+    background-image: linear-gradient(325deg, #3c4247, #0a0c0e);
+    box-shadow: 0 0 16px 4px rgba(0,0,0,0.4),
+                inset 0 0 2px gray;
+    border-radius: 50%;
+    background-clip: padding-box;
+    mix-blend-mode: screen;
+}

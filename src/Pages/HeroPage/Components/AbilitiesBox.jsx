@@ -45,7 +45,26 @@ function AbilityTooltip({heroName, ability, title, desc, lore}){
     )
 }
 
-function TalentsTooltip(){
+function TalentTreeTooltip(){
+    function TalentTreeLevel({level}){
+        return(
+        <div className="talent-tree-level">
+            <div className="left-branch"> adkfjasdfaksdfasdfas</div>
+            <div className="level">{level}</div>
+            <div className="right-branch">safdafksjfadsfasfd</div>
+        </div>
+        )
+    }
+    return(
+        <div className="talent-tree-tooltip-container">
+            <h1 className='talent-tree-title'>TALENT TREE</h1>
+            {[5,10,15,20,25].map((level)=>{
+                return(
+                <TalentTreeLevel level={level}/>
+            )
+            })}
+        </div>
+    )
 
 }
 
@@ -141,11 +160,15 @@ export function AbilitiesBox({heroName, abilities}){
     const [showInnateTooltip, setShowInnateTooltip] =  useState(false);
     const [showScepterTooltip, setShowScepterTooltip] =  useState(false);
     const [showShardTooltip, setShowShardTooltip] =  useState(false);
+    const [showTalentTreeTooltip, setShowTalentTreeTooltip] =  useState(false);
 
     return(
         <div className="abilities-box-container">
             {/* Talent Treee */}
-            <div className = "talent-tree image-container" >
+            <div className = "talent-tree image-container" 
+            onMouseEnter={()=>{setShowTalentTreeTooltip(true)}}
+            onMouseLeave={()=>{setShowTalentTreeTooltip(false)}}>
+                {showTalentTreeTooltip && <TalentTreeTooltip />}
                 <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg" />
             </div>
             {/* Innate Ability */}
