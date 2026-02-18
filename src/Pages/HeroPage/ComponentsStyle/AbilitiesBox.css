@@ -141,6 +141,7 @@
 .talent-tree-tooltip-container .talent-tree-title{
     display: flex;
     color: white;
+    text-shadow: 0 0 4px gray;
     font-weight: bolder;
     font-size: larger;
     text-align: center;

@@ -7,9 +7,7 @@ export function TextArea({heroName}){
     const [lore, setLore] = useState("");
     useEffect(() => {
         axios.get(apiLink).then((response)=>{
-            setLore(response.data[heroName]).catch((error)=>{
-                console.log(error);
-        })})
+            setLore(response.data[heroName])})
     },[])
         return(
         <div className="text-area-container">
