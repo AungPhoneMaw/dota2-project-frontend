@@ -1,4 +1,4 @@
-import {useEffect, useState, useContext} from "react";
+import {useState, useContext} from "react";
 import {HeroAbilitiesContext} from "./HeroPageContexts"
 import { FacetTooltip } from "./Tooltips";
 import { HeroNameContext } from "../HeroNameContext"

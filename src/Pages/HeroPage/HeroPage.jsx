@@ -3,7 +3,6 @@ import { heroData } from "../../assets/herodata"
 import { useParams } from 'react-router'
 import { HeaderBar} from '../SharedComponents/HeaderBar'
 import { MainContents } from "./Components/MainContents"; 
-import { createContext } from "react";
 import { HeroNameContext } from "./HeroNameContext";
 
 export function HeroPage() {
