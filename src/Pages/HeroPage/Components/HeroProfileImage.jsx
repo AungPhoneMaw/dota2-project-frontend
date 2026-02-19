@@ -1,5 +1,8 @@
 import "../ComponentsStyle/HeroProfileImage.css"
 
+
+//export component : HeroProfileImage
+
 export function HeroProfileImage({heroName}) {
     return(
         <div className = "hero-profile-image-container">

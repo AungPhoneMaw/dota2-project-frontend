@@ -1,28 +1,11 @@
-import {useEffect, useState } from "react";
+import {useEffect, useState, useContext} from "react";
+import {HeroAbilitiesContext} from "./HeroPageContexts"
+import { FacetTooltip } from "./Tooltips";
 import "../ComponentsStyle/Facets.css"
 
-function FacetTooltip({facetName, facetColor, facetIcon, deprecated, facetDescription}){
-    if (deprecated !== "true" && deprecated !== "1"){
-        return(
-            <div className="facet-tooltip-container">
-                <div className="facet-tooltip-header-container" 
-                style={{backgroundColor : `rgb(from ${facetColor} r g b / 0.6) `}}>
-                    <div className="facet-tooltip-icon-container">
-                        <img className="facet-tooltip-icon"
-                        src={`https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/facets/${facetIcon}.png`}/>
-                    </div>
-                    <h1 className="facet-tooltip-title">{facetName}</h1>
-                </div>
-                <div className="facet-tooltip-description">
-                    <p>{facetDescription}</p>
-                </div>
-
-            </div>
-        )
-    }
-}
 
 
+//Components inside the Facets
 
 function Facet({facetName, facetColor, facetIcon, deprecated, facetDescription}){
     const [showTooltip, setShowTooltip] = useState(false);
@@ -44,8 +27,15 @@ function Facet({facetName, facetColor, facetIcon, deprecated, facetDescription})
         )
 }}
 
-export function Facets({heroName, facets}){
+//----------------------------------------------------------------------------------------------------
 
+//export component : Facets
+
+export function Facets({heroName}){
+    const heroAbilities = useContext(HeroAbilitiesContext);
+    if (!heroAbilities) return null; 
+
+    const facets = heroAbilities[`npc_dota_hero_${heroName}`]["facets"]
     return(
         <div className="facets-container">
             {facets.map((facet)=>{

@@ -6,9 +6,8 @@ import {AbilityTooltip, TalentTreeTooltip,
         InnateTooltip, ScepterTooltip, ShardTooltip} from './Tooltips'
 import "../ComponentsStyle/AbilitiesBox.css"
 
-//tooltips components
 
-//main components -->AbilityImage, AbilityImages
+//Components inside the ability box
 
 function AbilityImage({heroName, ability}){
     const [showTooltip, setShowTooltip] = useState(false);
@@ -36,6 +35,7 @@ function AbilityImage({heroName, ability}){
                         onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
     </div>)
 }
+//-----------------------------------------------------------------------------------------------
 
 //export Component : AbilitiesBox
 

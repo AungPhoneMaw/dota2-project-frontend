@@ -41,7 +41,7 @@ export function MainContents({heroName}){
                     <AbilitiesBox heroName = {heroName} abilities = {abilities}/>
                 </div>
                 <div style={{gridArea: "box-4"}}>
-                    <Facets heroName = {heroName} facets={facets}/>
+                    <Facets heroName = {heroName} />
                 </div>
             </div>
         </ContextProvider>

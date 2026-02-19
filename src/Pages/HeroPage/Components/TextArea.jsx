@@ -1,17 +1,16 @@
-import axios from "axios";
-import { use, useEffect, useState } from "react";
+import { useContext} from "react";
+import { HeroLoreContext } from "./HeroPageContexts";
 import "../ComponentsStyle/TextArea.css"
 
+
+//export component : TextArea
+
 export function TextArea({heroName}){
-    const apiLink = "https://api.opendota.com/api/constants/hero_lore";
-    const [lore, setLore] = useState("");
-    useEffect(() => {
-        axios.get(apiLink).then((response)=>{
-            setLore(response.data[heroName])})
-    },[])
+    const heroLore = useContext(HeroLoreContext);
+    if (!heroLore) return null;
         return(
         <div className="text-area-container">
-            <p>{lore}</p>
+            <p>{heroLore[heroName]}</p>
         </div>
     )
 }
