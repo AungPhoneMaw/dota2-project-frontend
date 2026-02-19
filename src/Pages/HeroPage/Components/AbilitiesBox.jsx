@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {heroInnates} from '../../../assets/heroInnates'
 import { heroAghanim } from '../../../assets/heroAghanim';
-import { use, useEffect, useState, Fragment } from "react";
+import { HeroAbilitiesContext, AbilitiesContext } from './HeroPageContexts';
+import { useContext, useEffect, useState, Fragment } from "react";
 import {AbilityTooltip, TalentTreeTooltip, 
         InnateTooltip, ScepterTooltip, ShardTooltip} from './Tooltips'
 import "../ComponentsStyle/AbilitiesBox.css"
@@ -10,27 +11,23 @@ import "../ComponentsStyle/AbilitiesBox.css"
 //Components inside the ability box
 
 function AbilityImage({heroName, ability}){
+    //toggle tooltip
     const [showTooltip, setShowTooltip] = useState(false);
-    const apiLink = "https://api.opendota.com/api/constants/abilities";
-    const [displayName, setDisplayName] = useState("");
-    const [description, setDescription] = useState("");
-    const [lore, setLore] = useState("");
-    // get title, icon, description from the api
 
-    useEffect(()=>{
-        axios.get(apiLink).then((response)=>{
-            setDisplayName(response.data[ability]["dname"])
-            setDescription(response.data[ability]["desc"])
-            setLore(response.data[ability]["lore"])
-            
-        })
-    },[])
+    //context variable here
+    const abilitiesConstant = useContext(AbilitiesContext);
+    if (!abilitiesConstant) return null;
+
+    const title = abilitiesConstant[ability]["dname"];
+    const desc = abilitiesConstant[ability]["desc"];
+    const lore = abilitiesConstant[ability]["lore"]
+
     return(
     <div key={ability} className = "image-container" 
     onMouseEnter={()=>{setShowTooltip(true)}} 
     onMouseLeave={()=>{setShowTooltip(false)}}>
-        { showTooltip && <AbilityTooltip heroName={heroName} ability={ability} title={displayName} 
-        desc = {description} lore={lore}/>}
+        { showTooltip && <AbilityTooltip heroName={heroName} ability={ability} title={title} 
+        desc = {desc} lore={lore}/>}
         <img src = {`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`} 
                         onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
     </div>)
@@ -39,29 +36,44 @@ function AbilityImage({heroName, ability}){
 
 //export Component : AbilitiesBox
 
-export function AbilitiesBox({heroName, abilities}){
+export function AbilitiesBox({heroName}){
+
+    /* Toggle tooltips */
     const [showInnateTooltip, setShowInnateTooltip] =  useState(false);
     const [showScepterTooltip, setShowScepterTooltip] =  useState(false);
     const [showShardTooltip, setShowShardTooltip] =  useState(false);
     const [showTalentTreeTooltip, setShowTalentTreeTooltip] =  useState(false);
+    
+    /*context variables here*/
+    const heroAbilities = useContext(HeroAbilitiesContext);
+    if(!heroAbilities) return null;
+
+    const abilities = heroAbilities[`npc_dota_hero_${heroName}`]["abilities"];
 
     return(
         <div className="abilities-box-container">
             {/* Talent Treee */}
+
             <div className = "talent-tree image-container" 
             onMouseEnter={()=>{setShowTalentTreeTooltip(true)}}
             onMouseLeave={()=>{setShowTalentTreeTooltip(false)}}>
                 {showTalentTreeTooltip && <TalentTreeTooltip heroName={heroName} />}
                 <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg" />
             </div>
+            {/* ------------------------------------------------------------------------------- */}
+
             {/* Innate Ability */}
+
             <div className="innate-ability image-container"
             onMouseEnter={()=>{setShowInnateTooltip(true)}}
             onMouseLeave={()=>{setShowInnateTooltip(false)}}>
                 {showInnateTooltip && <InnateTooltip heroName={heroName}/>}
                 <img src="/shared/innate-abilityicon.png" />
             </div>
+            {/* ------------------------------------------------------------------------------------ */}
+
             {/* Hero Abilities */}
+
             {abilities.map((ability)=>{
                 return(
                     ability.includes("_cancel")?(
@@ -72,7 +84,11 @@ export function AbilitiesBox({heroName, abilities}){
                          
                 )
             })}
+
+            {/* ------------------------------------------------------------------------------------ */}
+
             {/* Aghanim scepter and shard */}
+
             <div className="image-container">
                 <div className='wrapper'
                     onMouseEnter={()=>{setShowScepterTooltip(true)}}

@@ -1,5 +1,6 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import axios from 'axios';
+import { HeroAbilitiesContext, AbilitiesContext } from './HeroPageContexts';
 import {heroInnates} from '../../../assets/heroInnates'
 import { heroAghanim } from '../../../assets/heroAghanim';
 import "../ComponentsStyle/Tooltips.css"
@@ -79,33 +80,18 @@ export function AbilityTooltip({heroName, ability, title, desc, lore}){
 
 //Talent Tree Tooltips
 export function TalentTreeTooltip({heroName}){
-    const heroAbilitiesURL = "https://api.opendota.com/api/constants/hero_abilities";
-    const abilitiesURL = "https://api.opendota.com/api/constants/abilities";
 
-    const [talentDesc, setTalentDesc] = useState([]);
-    useEffect(()=>{
-        // getting talent treee description logic here
-        async function fetchData(){
-            const [heroAbilities, abilities] = await Promise.all([
-                axios.get(heroAbilitiesURL),
-                axios.get(abilitiesURL)
-            ]);
-            console.log(heroName);
-            console.log(heroAbilities);
-            const heroTalents = heroAbilities.data[`npc_dota_hero_${heroName}`]["talents"];
-            const descriptions = heroTalents.map((talent) => {
-                                        return abilities.data[talent.name]["dname"];
-                                });
-            setTalentDesc(descriptions)
+    //context variable here
+    const heroAbilities = useContext(HeroAbilitiesContext);
+    if(!heroAbilities) return null;
+    const abilities = useContext(AbilitiesContext);
+    if(!abilities) return null;
 
-            console.log(heroName)
-            console.log(talentDesc)
-
-        }
-
-        fetchData();
-    },[heroName])
-
+    const heroTalents = heroAbilities[`npc_dota_hero_${heroName}`]["talents"];
+    const talentDesc = heroTalents.map((talent) => {
+                                        return abilities[talent.name]["dname"];
+                                    });
+    
     function TalentTreeLevel({level, left, right}){
         return(
         <div className="talent-tree-level">
@@ -115,6 +101,7 @@ export function TalentTreeTooltip({heroName}){
         </div>
         )
     }
+    
     return(
         <div className="talent-tree-tooltip-container">
             <h1 className='talent-tree-title'>TALENT TREE</h1>
@@ -134,20 +121,16 @@ export function TalentTreeTooltip({heroName}){
 
 //Innate Tooltips
 export function InnateTooltip({heroName}){
-    const apiLink = "https://api.opendota.com/api/constants/abilities";
+
     const icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"
     const innateName = heroInnates[`npc_dota_hero_${heroName}`][0]
-    const [title, setTitle]  = useState("");
-    const [desc, setDesc] = useState("");
 
-    useEffect(()=>{
-        axios.get(apiLink).then((response)=>{
-            setTitle(response.data[innateName]["dname"]);
-            setDesc(response.data[innateName]["desc"]);
-            
-        })
+    //context variable here
+    const abilities = useContext(AbilitiesContext);
+    if(!abilities) return null;
 
-    }, [])
+    const title = abilities[innateName]["dname"]; 
+    const desc = abilities[innateName]["desc"];
 
         return(
         <div className="ability-tooltip-container">
