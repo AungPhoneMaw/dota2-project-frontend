@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import {heroInnates} from '../../../assets/heroInnates'
 import { heroAghanim } from '../../../assets/heroAghanim';
+import "../ComponentsStyle/Tooltips.css"
 
 //ToolTips
 
