@@ -1,8 +1,36 @@
 import {useState, useEffect} from 'react'
+import axios from 'axios';
+import {heroInnates} from '../../../assets/heroInnates'
+import { heroAghanim } from '../../../assets/heroAghanim';
 
-//tooltips components
+//ToolTips
 
-function FacetTooltip({facetName, facetColor, facetIcon, deprecated, facetDescription}){
+//FacetTooltip, AbilityTooltip, TalentTreeTooltip, InnateTooltip, ScepterTooltip, ShardTooltip
+
+// base tooltips component
+function BaseTooltipContainer({icon, title, desc}){
+    return(
+        <>
+            <div className="ability-tooltip-header-container">
+                <div className="ability-tooltip-icon-container">
+                    <img src = {icon} 
+                        onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
+                </div>
+                <h1 className="ability-tooltip-title">
+                    {title}
+                </h1>
+            </div>
+            <div className="ability-tooltip-description-container">
+                <p className = "ability-tooltip-description">{desc}</p>
+            </div>
+        </>
+    )
+}
+
+//----------------------------------------------------------------------------------------------
+
+//Facet Tooltips
+export function FacetTooltip({facetName, facetColor, facetIcon, deprecated, facetDescription}){
     if (deprecated !== "true" && deprecated !== "1"){
         return(
             <div className="facet-tooltip-container">
@@ -23,26 +51,10 @@ function FacetTooltip({facetName, facetColor, facetIcon, deprecated, facetDescri
     }
 }
 
-function BaseTooltipContainer({icon, title, desc}){
-    return(
-        <>
-            <div className="ability-tooltip-header-container">
-                <div className="ability-tooltip-icon-container">
-                    <img src = {icon} 
-                        onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
-                </div>
-                <h1 className="ability-tooltip-title">
-                    {title}
-                </h1>
-            </div>
-            <div className="ability-tooltip-description-container">
-                <p className = "ability-tooltip-description">{desc}</p>
-            </div>
-        </>
-    )
-}
+//----------------------------------------------------------------------------------------------------
 
-function AbilityTooltip({heroName, ability, title, desc, lore}){
+// Ability Tooltips
+export function AbilityTooltip({heroName, ability, title, desc, lore}){
     const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`
 
     return(
@@ -62,7 +74,10 @@ function AbilityTooltip({heroName, ability, title, desc, lore}){
     )
 }
 
-function TalentTreeTooltip({heroName}){
+//-----------------------------------------------------------------------------------------------------
+
+//Talent Tree Tooltips
+export function TalentTreeTooltip({heroName}){
     const heroAbilitiesURL = "https://api.opendota.com/api/constants/hero_abilities";
     const abilitiesURL = "https://api.opendota.com/api/constants/abilities";
 
@@ -114,7 +129,10 @@ function TalentTreeTooltip({heroName}){
 
 }
 
-function InnateTooltip({heroName}){
+//--------------------------------------------------------------------------------------------------
+
+//Innate Tooltips
+export function InnateTooltip({heroName}){
     const apiLink = "https://api.opendota.com/api/constants/abilities";
     const icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"
     const innateName = heroInnates[`npc_dota_hero_${heroName}`][0]
@@ -138,7 +156,11 @@ function InnateTooltip({heroName}){
     )
 }
 
-function ScepterTooltip({heroName}){
+//---------------------------------------------------------------------------------------------------------------------
+
+//Scepter Tooltips
+
+export function ScepterTooltip({heroName}){
     const abilityName = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_skill_name_nd"];
     const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${abilityName}.png`;
     const title = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_skill_name"];
@@ -154,7 +176,10 @@ function ScepterTooltip({heroName}){
     )
 }
 
-function ShardTooltip({heroName}){
+//-----------------------------------------------------------------------------------------------------------------
+
+//Shard Tooltips
+export function ShardTooltip({heroName}){
 
     const abilityName = heroAghanim[`npc_dota_hero_${heroName}`]["shard_skill_name_nd"];
     const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${abilityName}.png`;

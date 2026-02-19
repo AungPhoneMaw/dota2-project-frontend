@@ -11,16 +11,28 @@ export function ContextProvider({children}){
     const [abilities, setAbilities] = useState();
 
     useEffect(()=>{
-        axios.get(heroAbilitiesAPI).then((response)=>{
-            setHeroAbilities(response.data);
-        })
-        axios.get(abilitiesAPI).then((response)=>{
-            setAbilities(response.data);
-        })
-    })
+        async function fetchData(){
+            try{
+                const [heroAbilitiesRes, abilitiesRes] = await Promise.all([
+                axios.get(heroAbilitiesAPI),
+                axios.get(abilitiesAPI)
+                ]);
+
+                setHeroAbilities(heroAbilitiesRes);
+                setAbilities(abilitiesRes);
+            } catch(error){
+                console.error("API error :", error);
+            }
+            
+            
+        }
+
+        // -------------------------------------------------------------
+
+    }, [])
     return(
-        <HeroAbilitiesContext.Provider value={heroAbilities}>
-            <AbilitiesContext.Provider value={abilities}>
+        <HeroAbilitiesContext.Provider value={{heroAbilities}}>
+            <AbilitiesContext.Provider value={{abilities}}>
                 {children}
             </AbilitiesContext.Provider>
         </HeroAbilitiesContext.Provider>
