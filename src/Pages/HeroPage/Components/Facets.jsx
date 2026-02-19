@@ -1,6 +1,7 @@
 import {useEffect, useState, useContext} from "react";
 import {HeroAbilitiesContext} from "./HeroPageContexts"
 import { FacetTooltip } from "./Tooltips";
+import { HeroNameContext } from "../HeroNameContext"
 import "../ComponentsStyle/Facets.css"
 
 
@@ -31,7 +32,8 @@ function Facet({facetName, facetColor, facetIcon, deprecated, facetDescription})
 
 //export component : Facets
 
-export function Facets({heroName}){
+export function Facets(){
+    const heroName = useContext(HeroNameContext);
     const heroAbilities = useContext(HeroAbilitiesContext);
     if (!heroAbilities) return null; 
 

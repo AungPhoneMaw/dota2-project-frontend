@@ -1,8 +1,6 @@
-import axios from 'axios';
-import {heroInnates} from '../../../assets/heroInnates'
-import { heroAghanim } from '../../../assets/heroAghanim';
 import { HeroAbilitiesContext, AbilitiesContext } from './HeroPageContexts';
-import { useContext, useEffect, useState, Fragment } from "react";
+import { HeroNameContext } from '../HeroNameContext';
+import { useContext, useState, Fragment } from "react";
 import {AbilityTooltip, TalentTreeTooltip, 
         InnateTooltip, ScepterTooltip, ShardTooltip} from './Tooltips'
 import "../ComponentsStyle/AbilitiesBox.css"
@@ -10,11 +8,12 @@ import "../ComponentsStyle/AbilitiesBox.css"
 
 //Components inside the ability box
 
-function AbilityImage({heroName, ability}){
+function AbilityImage({ability}){
     //toggle tooltip
     const [showTooltip, setShowTooltip] = useState(false);
 
     //context variable here
+    const heroName = useContext(HeroNameContext);
     const abilitiesConstant = useContext(AbilitiesContext);
     if (!abilitiesConstant) return null;
 
@@ -36,7 +35,7 @@ function AbilityImage({heroName, ability}){
 
 //export Component : AbilitiesBox
 
-export function AbilitiesBox({heroName}){
+export function AbilitiesBox(){
 
     /* Toggle tooltips */
     const [showInnateTooltip, setShowInnateTooltip] =  useState(false);
@@ -45,6 +44,7 @@ export function AbilitiesBox({heroName}){
     const [showTalentTreeTooltip, setShowTalentTreeTooltip] =  useState(false);
     
     /*context variables here*/
+    const heroName = useContext(HeroNameContext);
     const heroAbilities = useContext(HeroAbilitiesContext);
     if(!heroAbilities) return null;
 

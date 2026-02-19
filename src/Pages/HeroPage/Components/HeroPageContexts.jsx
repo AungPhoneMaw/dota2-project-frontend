@@ -5,6 +5,7 @@ export const HeroAbilitiesContext = createContext();
 export const AbilitiesContext = createContext();
 export const HeroLoreContext = createContext();
 
+
 export function ContextProvider({children}){
     const heroAbilitiesAPI = "https://api.opendota.com/api/constants/hero_abilities";
     const abilitiesAPI = "https://api.opendota.com/api/constants/abilities";
@@ -38,12 +39,14 @@ export function ContextProvider({children}){
 
     }, [])
     return(
+
         <HeroAbilitiesContext.Provider value={heroAbilities}>
             <AbilitiesContext.Provider value={abilities}>
                 <HeroLoreContext.Provider value= {heroLore}>
-                    {children}
+                        {children}
                 </HeroLoreContext.Provider>
             </AbilitiesContext.Provider>
         </HeroAbilitiesContext.Provider>
+ 
     )
 }
