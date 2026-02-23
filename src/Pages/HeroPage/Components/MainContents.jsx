@@ -1,11 +1,12 @@
 import { HeroProfileImage } from "./HeroProfileImage";
 import { TextArea} from "./TextArea";
+import {Stats} from "./Stats";
 import {AbilitiesBox } from "./AbilitiesBox";
 import {Facets} from "./Facets";
 import { useEffect, useContext } from "react";
 import { HeroAbilitiesContext} from './HeroPageContexts';
 import { HeroNameContext } from '../HeroNameContext';
-import "../ComponentsStyle/MainContens.css"
+import "../ComponentsStyle/MainContens.css";
 
 
 
@@ -47,6 +48,9 @@ export function MainContents(){
                 </div>
                 <div style={{gridArea: "box-4"}}>
                     <Facets  />
+                </div>
+                <div style={{gridArea: "box-5"}}>
+                    <Stats  />
                 </div>
             </div>
     )

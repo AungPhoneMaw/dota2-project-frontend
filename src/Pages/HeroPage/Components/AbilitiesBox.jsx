@@ -113,7 +113,8 @@ export function AbilitiesBox(){
         <div className="abilities-box-container">
             <TalentTree heroName={heroName}/>
             <InnateAbility heroName={heroName}/>
-            {abilities.map((ability)=>{
+            <div className="abilities-wrapper">
+                {abilities.map((ability)=>{
                 return(
                     ability.includes("_cancel")?(
                         <Fragment key={ability}/>
@@ -123,6 +124,8 @@ export function AbilitiesBox(){
                          
                 )
             })}
+            </div>
+            
 
             <div className="image-container">
                 <Scepter heroName={heroName}/>

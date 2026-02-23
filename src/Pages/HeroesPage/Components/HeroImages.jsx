@@ -1,6 +1,8 @@
 import { heroData } from "../../../assets/herodata"
 import '../ComponentsStyle/HeroImages.css'
 import { useNavigate } from 'react-router'
+
+
 function HeroImage({ hero, attribute }) {
   const navigate = useNavigate();
   return (

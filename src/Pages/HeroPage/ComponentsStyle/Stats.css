@@ -1,0 +1,136 @@
+/*  */
+.stats-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stats-container .vertical-line{
+    width: 1px;
+    height: 100px;
+    background-color: gray;
+}
+/* -------------------------------------------------------------------------------------------------------------------------- */
+
+/* ATTR COL */
+
+.attr-col-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.attr-col-container .flex-row-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.attr-col-container .flex-row-wrapper .images-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.attr-col-container .flex-row-wrapper .images-container .hero-img{
+    width: 100px;
+    height:60px ;
+}
+
+.attr-col-container .flex-row-wrapper .images-container .hp-bar{
+    width: 100px;
+    height: 20px;
+    background-image: linear-gradient(to right, green, greenyellow);
+}
+
+.attr-col-container .flex-row-wrapper .images-container .mana-bar{
+    width: 100px;
+    height: 20px;
+
+    background-image: linear-gradient(to right, blue, cyan);
+}
+
+.attr-col-container .flex-row-wrapper .attr-container{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+}
+
+.attr-col-container .flex-row-wrapper .attr-container .attr-row{
+    display: flex;
+    flex-direction: row;
+    border: solid 1px black;
+    justify-content: center;
+    align-items: center;
+}
+
+.attr-col-container .flex-row-wrapper .attr-container .attr-row p{
+    display: block;
+    border: solid 1px black;
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 5px;
+
+}
+
+.attr-col-container .flex-row-wrapper .attr-container .attr-icon{
+    width: 30px;
+    height: 30px;
+    border: solid 1px black;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+/* ROLES COL */
+
+.role-col-container{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: auto auto auto;
+    border: solid 1px black;
+}
+
+.role-col-container .role-container{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    justify-content: center;
+    align-items: center;
+}
+
+.role-col-container .role-container .score-bar{
+    width: 90%;
+    height: 5px;
+    background-color: gray;
+}
+
+.role-col-container .role-container p{
+    margin: 0;
+    display: block;
+    border: solid 1px black;
+}
+
+/* ------------------------------------------------------------------------------------------------------ */
+
+/* STATS COL */
+
+.stats-col-container{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    border: solid 1px black;
+}
+
+.stats-col-container .col-wrapper{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+}
+
+.stats-col-container .col-wrapper .stat{
+    display: flex;
+    flex-direction: row;
+    border: solid 1px black;
+}
+
+.stats-col-container .col-wrapper .stat p{
+    margin: 0;
+    border: solid 1px black;
+
+}
