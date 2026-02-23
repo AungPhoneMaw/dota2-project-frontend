@@ -81,9 +81,14 @@ set right(value) {
         <div ref={tooltipRef}  className="ability-tooltip-container" 
         style={style}>
             <div className="tooltip-video-container">
-                <video autoPlay preload='auto' loop playsInline
+                <video autoPlay
+                preload='auto' 
+                loop 
+                playsInline
+                muted
                 poster={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.jpg`}
-                onLoadedMetadata = {()=> setReady(true)}>
+                onLoadedMetadata = {()=> setReady(true)} 
+                onError={()=> setReady(true)}>
                     <source type="video/web" src={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.webm`} />
                     <source type= "video/mp4" src={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.mp4`} />
                 </video>

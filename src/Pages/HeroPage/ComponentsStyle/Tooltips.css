@@ -1,19 +1,28 @@
 /* Ability Tootltip */
 .ability-tooltip-container{
     z-index: 2;
-    width : 400px;
+    width : 300px;
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(to bottom, var(--bg-deeper),var(--surface-deep));
 }
 
 .ability-tooltip-container .tooltip-video-container{
+    display: inline-block;
     object-fit: cover;
     width: 100%;
 }
 
+.ability-tooltip-container .tooltip-video-container video:empty{
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 .ability-tooltip-container .tooltip-video-container video{
-    width : 400px;
+    width : 300px;
+    height: 200px;
     object-fit: cover;
 }
 

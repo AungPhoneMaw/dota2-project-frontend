@@ -2,15 +2,39 @@ import { HeroProfileImage } from "./HeroProfileImage";
 import { TextArea} from "./TextArea";
 import {AbilitiesBox } from "./AbilitiesBox";
 import {Facets} from "./Facets";
-import { ContextProvider } from "./HeroPageContexts";
+import { useEffect, useContext } from "react";
+import { HeroAbilitiesContext} from './HeroPageContexts';
+import { HeroNameContext } from '../HeroNameContext';
 import "../ComponentsStyle/MainContens.css"
 
 
 
 export function MainContents(){
+    const heroName = useContext(HeroNameContext);
+    const heroAbilities = useContext(HeroAbilitiesContext);
+    if(!heroAbilities) return null;
 
+    const abilities = heroAbilities[`npc_dota_hero_${heroName}`]["abilities"];
+
+    useEffect(()=>{
+        abilities.forEach(ability=>{
+            const video = document.createElement("video");
+            const videoWebm = `https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.webm` ;
+            const videoMp4 = `https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.mp4` ;
+            const poster = `https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.jpg`;
+
+            //preload poster
+            const img = new Image();
+            img.src = poster;
+
+            //preload videos
+/* 
+            fetch(videoWebm).catch(()=>{});
+            fetch(videoMp4).catch(()=>{}); */
+        });
+
+    }, [heroName])
     return(
-        <ContextProvider>
             <div className="main-contents-container">
                 <div style={{gridArea: "box-1"}}>
                     <HeroProfileImage />
@@ -25,7 +49,5 @@ export function MainContents(){
                     <Facets  />
                 </div>
             </div>
-        </ContextProvider>
-        
     )
 }
