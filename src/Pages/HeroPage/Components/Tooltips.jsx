@@ -1,6 +1,7 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect, useContext, useRef, useLayoutEffect} from 'react'
 import axios from 'axios';
 import { HeroAbilitiesContext, AbilitiesContext } from './HeroPageContexts';
+import {renderTooltip} from '../../../utils/renderTooltip';
 import {heroInnates} from '../../../assets/heroInnates'
 import { heroAghanim } from '../../../assets/heroAghanim';
 import "../ComponentsStyle/Tooltips.css"
@@ -56,14 +57,33 @@ export function FacetTooltip({facetName, facetColor, facetIcon, deprecated, face
 //----------------------------------------------------------------------------------------------------
 
 // Ability Tooltips
-export function AbilityTooltip({heroName, ability, title, desc, lore}){
+export function AbilityTooltip({anchorRef,heroName, ability, title, desc, lore}){
     const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`
+    /* tooltip Ref here */
+    const tooltipRef = useRef(null);
+
+    const [style, setStyle] = useState({position:"fixed", left:"-9999px", top: "-9999px",
+get right() {
+            return this._right;
+        },
+set right(value) {
+            this._right = value;
+        },
+});
+    const [ready, setReady] = useState(false)
+
+    /* fixing tooltip getting out of frame */
+    useLayoutEffect(()=>{
+        renderTooltip(anchorRef,tooltipRef, ready, setStyle)
+    },[ready]);
 
     return(
-        <div className="ability-tooltip-container">
+        <div ref={tooltipRef}  className="ability-tooltip-container" 
+        style={style}>
             <div className="tooltip-video-container">
                 <video autoPlay preload='auto' loop playsInline
-                poster={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.jpg` }>
+                poster={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.jpg`}
+                onLoadedMetadata = {()=> setReady(true)}>
                     <source type="video/web" src={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.webm`} />
                     <source type= "video/mp4" src={`https://cdn.steamstatic.com/apps/dota2/videos/dota_react/abilities/${heroName}/${ability}.mp4`} />
                 </video>
@@ -79,7 +99,10 @@ export function AbilityTooltip({heroName, ability, title, desc, lore}){
 //-----------------------------------------------------------------------------------------------------
 
 //Talent Tree Tooltips
-export function TalentTreeTooltip({heroName}){
+export function TalentTreeTooltip({anchorRef, heroName}){
+    const [style, setStyle] = useState({position:"fixed", left:"-9999px", top:"-9999px"});
+    /* tooltip Ref here */
+    const tooltipRef = useRef(null);
 
     //context variable here
     const heroAbilities = useContext(HeroAbilitiesContext);
@@ -89,7 +112,7 @@ export function TalentTreeTooltip({heroName}){
 
     const heroTalents = heroAbilities[`npc_dota_hero_${heroName}`]["talents"];
     const talentDesc = heroTalents.map((talent) => {
-                                        return abilities[talent.name]["dname"];
+                                        return abilities[talent.name]?.dname || "";
                                     });
     
     function TalentTreeLevel({level, left, right}){
@@ -101,9 +124,14 @@ export function TalentTreeTooltip({heroName}){
         </div>
         )
     }
+
+    useLayoutEffect(()=>{
+        return renderTooltip(anchorRef, tooltipRef, true, setStyle)
+    }, []
+    )
     
     return(
-        <div className="talent-tree-tooltip-container">
+        <div ref={tooltipRef} className="talent-tree-tooltip-container" style={style}>
             <h1 className='talent-tree-title'>TALENT TREE</h1>
             {[25,20,15,10].map((level)=>{
                 return(
@@ -120,9 +148,12 @@ export function TalentTreeTooltip({heroName}){
 //--------------------------------------------------------------------------------------------------
 
 //Innate Tooltips
-export function InnateTooltip({heroName}){
+export function InnateTooltip({anchorRef, heroName}){
+    const [style, setStyle] = useState({position:"fixed", left:"-9999px", top:"-9999px"});
+    /* tooltip Ref here */
+    const tooltipRef = useRef(null);
 
-    const icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"
+    const icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react/icons/innate_icon.png"   
     const innateName = heroInnates[`npc_dota_hero_${heroName}`][0]
 
     //context variable here
@@ -132,8 +163,13 @@ export function InnateTooltip({heroName}){
     const title = abilities[innateName]["dname"]; 
     const desc = abilities[innateName]["desc"];
 
+    useLayoutEffect(()=>{
+        return renderTooltip(anchorRef, tooltipRef, true, setStyle)
+    }, []
+    )
+
         return(
-        <div className="ability-tooltip-container">
+        <div ref={tooltipRef} className="ability-tooltip-container" style={style}>
             <BaseTooltipContainer icon = {icon} title={title} desc={desc} />
 
         </div>
@@ -144,16 +180,24 @@ export function InnateTooltip({heroName}){
 
 //Scepter Tooltips
 
-export function ScepterTooltip({heroName}){
+export function ScepterTooltip({anchorRef, heroName}){
+    const [style, setStyle] = useState({position:"fixed", left:"-9999px", top:"-9999px"});
+    /* tooltip Ref here */
+    const tooltipRef = useRef(null);
+
     const abilityName = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_skill_name_nd"];
     const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${abilityName}.png`;
+    
     const title = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_skill_name"];
     const desc = heroAghanim[`npc_dota_hero_${heroName}`]["scepter_desc"];
 
-
+    useLayoutEffect(()=>{
+        return renderTooltip(anchorRef, tooltipRef, true, setStyle)
+    }, []
+    )
 
     return(
-        <div className="ability-tooltip-container">
+        <div ref={tooltipRef} className="ability-tooltip-container" style={style}>
             <BaseTooltipContainer icon = {icon} title={title} desc={desc} />
 
         </div>
@@ -163,17 +207,22 @@ export function ScepterTooltip({heroName}){
 //-----------------------------------------------------------------------------------------------------------------
 
 //Shard Tooltips
-export function ShardTooltip({heroName}){
-
+export function ShardTooltip({anchorRef, heroName}){
+    const [style, setStyle] = useState({position:"fixed", left:"-9999px", top:"-9999px"});
+    /* tooltip Ref here */
+    const tooltipRef = useRef(null);
     const abilityName = heroAghanim[`npc_dota_hero_${heroName}`]["shard_skill_name_nd"];
     const icon = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${abilityName}.png`;
     const title = heroAghanim[`npc_dota_hero_${heroName}`]["shard_skill_name"];
     const desc = heroAghanim[`npc_dota_hero_${heroName}`]["shard_desc"];
 
-
+    useLayoutEffect(()=>{
+        return renderTooltip(anchorRef, tooltipRef, true, setStyle)
+    }, []
+    )
 
     return(
-        <div className="ability-tooltip-container">
+        <div ref={tooltipRef} className="ability-tooltip-container" style={style}>
             <BaseTooltipContainer icon = {icon} title={title} desc={desc} />
 
         </div>

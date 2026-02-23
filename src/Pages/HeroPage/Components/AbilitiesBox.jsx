@@ -1,6 +1,7 @@
 import { HeroAbilitiesContext, AbilitiesContext } from './HeroPageContexts';
 import { HeroNameContext } from '../HeroNameContext';
 import { useContext, useState, useRef, useLayoutEffect, Fragment } from "react";
+import { createPortal } from 'react-dom';
 import {AbilityTooltip, TalentTreeTooltip, 
         InnateTooltip, ScepterTooltip, ShardTooltip} from './Tooltips'
 import "../ComponentsStyle/AbilitiesBox.css"
@@ -23,14 +24,14 @@ function AbilityImage({ability}){
     const lore = abilitiesConstant[ability]["lore"]
 
     return(
-    <div key={ability} className = "image-container" 
-    onMouseEnter={()=>{setShowTooltip(true)}} 
-    onMouseLeave={()=>{setShowTooltip(false)}}>
-        { showTooltip && <AbilityTooltip ref={anchorRef} heroName={heroName} 
-        ability={ability} title={title} desc = {desc} lore={lore}/>}
-        <img src = {`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`} 
-                        onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
-    </div>)
+        <div ref={anchorRef} key={ability} className = "image-container" 
+        onMouseEnter={()=>{setShowTooltip(true)}} 
+        onMouseLeave={()=>{setShowTooltip(false)}}>
+            { showTooltip && createPortal(<AbilityTooltip anchorRef={anchorRef} heroName={heroName} 
+            ability={ability} title={title} desc = {desc} lore={lore}/>, document.body)}
+            <img src = {`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/${ability}.png`} 
+                            onError = {(e)=>(e.currentTarget.parentElement.style.display="none")}/>
+        </div>)
 }
 //-----------------------------------------------------------------------------------------------
 
@@ -40,10 +41,10 @@ function TalentTree({heroName}){
     const anchorRef = useRef(null);
     const [showTalentTreeTooltip, setShowTalentTreeTooltip] =  useState(false);
     return(
-        <div className = "talent-tree image-container" 
+        <div ref={anchorRef} className = "talent-tree image-container" 
         onMouseEnter={()=>{setShowTalentTreeTooltip(true)}}
         onMouseLeave={()=>{setShowTalentTreeTooltip(false)}}>
-            {showTalentTreeTooltip && <TalentTreeTooltip ref={anchorRef} heroName={heroName} />}
+            {showTalentTreeTooltip && createPortal(<TalentTreeTooltip anchorRef={anchorRef} heroName={heroName} />, document.body)}
             <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/talents.svg" />
         </div>
     )
@@ -57,10 +58,10 @@ function InnateAbility({heroName}){
     const anchorRef = useRef(null);
     const [showInnateTooltip, setShowInnateTooltip] =  useState(false);
     return(
-        <div className="innate-ability image-container"
+        <div ref={anchorRef} className="innate-ability image-container"
         onMouseEnter={()=>{setShowInnateTooltip(true)}}
         onMouseLeave={()=>{setShowInnateTooltip(false)}}>
-            {showInnateTooltip && <InnateTooltip ref={anchorRef} heroName={heroName}/>}
+            {showInnateTooltip && createPortal(<InnateTooltip anchorRef={anchorRef} heroName={heroName}/>, document.body)}
             <img src="/shared/innate-abilityicon.png" />
         </div>
     )
@@ -73,10 +74,10 @@ function Scepter({heroName}){
     const anchorRef = useRef(null);
     const [showScepterTooltip, setShowScepterTooltip] =  useState(false);
     return(
-        <div className='wrapper'
+        <div ref={anchorRef} className='wrapper'
         onMouseEnter={()=>{setShowScepterTooltip(true)}}
         onMouseLeave={()=>{setShowScepterTooltip(false)}}>
-            {showScepterTooltip && <ScepterTooltip ref={anchorRef} heroName={heroName} />}
+            {showScepterTooltip && createPortal(<ScepterTooltip anchorRef={anchorRef} heroName={heroName} />, document.body)}
             <img className = "scepter-icon" src = "https://www.opendota.com/assets/images/dota2/scepter_0.png"/>
         </div>
     )
@@ -87,10 +88,10 @@ function Shard({heroName}){
     const anchorRef = useRef(null);
      const [showShardTooltip, setShowShardTooltip] =  useState(false);
     return(
-        <div className='wrapper' 
+        <div ref={anchorRef} className='wrapper' 
         onMouseEnter={()=>{setShowShardTooltip(true)}}
         onMouseLeave={()=>{setShowShardTooltip(false)}}>
-            {showShardTooltip && <ShardTooltip ref={anchorRef} heroName={heroName} />}
+            {showShardTooltip && createPortal(<ShardTooltip anchorRef={anchorRef} heroName={heroName} />, document.body)}
             <img className = "shard-icon" src= "https://www.opendota.com/assets/images/dota2/shard_0.png"/>
         </div>
     )
