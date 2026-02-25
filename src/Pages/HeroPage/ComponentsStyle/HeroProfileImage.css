@@ -1,11 +1,9 @@
 .hero-profile-image-container{
     width: 100%;
-    aspect-ratio: 3/4;
-    border: solid 1px black;
     border-radius: 15px;
 }
 
-.hero-profile-image-container img{
+.hero-profile-image-container video{
     height: 100%;
     width: 100%;
     object-fit: fill;

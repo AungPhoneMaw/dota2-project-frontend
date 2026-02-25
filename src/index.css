@@ -32,6 +32,12 @@
   --info: #7AA2F7;    /* links, info badges */
   --success: #9ECE6A; /* success states */
   --danger: #F7768E;  /* errors */
+
+  --grad-color-1 : #5E646E;
+  --grad-color-2 : #BFC5CF;
+  
+
+  
 }
 body{
   margin: 0;

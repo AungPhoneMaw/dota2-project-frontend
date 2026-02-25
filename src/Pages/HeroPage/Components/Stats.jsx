@@ -50,24 +50,32 @@ function AttributeColumn({heroName, heroStats}){
 function RoleColumn({heroStats}){
     const roles = ["Carry" , "Support" , "Nuker", "Disabler", "Jungler", "Durable", 
                    "Escape", "Pusher", "Initiator"]
+    const heroRoles = heroStats.roles;
 
-    function Role({roleName}){
+    function Role({roleName, active}){
         return(
-            <div className="role-container">
+            <div className={active?"role-container active":"role-container"}>
                 <p>{roleName}</p>
                 <div className="score-bar"></div>
             </div>
         )
     }
     return(
-        <div className="role-col-container">
-            {roles.map((roleName)=>{
-                return(
-                    <Role roleName={roleName}/>
-                )
-            })}
+        <div className="role">
+            <div className="role-col-container">
+                {roles.map((roleName)=>{
+                
+                    return(
+                        <Role key={roleName} 
+                        roleName={roleName} 
+                        active={heroRoles.includes(roleName)}/>
+                    )
+                })}
+            
+            </div>
             <div className="text-container">Roles</div>
         </div>
+        
     )
 }
 
@@ -98,39 +106,42 @@ function StatsColumn({heroName, heroStats}){
         )
     }
     return(
-        <div className="stats-col-container">
-            <div className="col-wrapper attack">
-                <Stat statName={"attack-dmg"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_damage.png"
-                value = {`${attackDmgMin}-${attackDmgMax}`}/>
-                <Stat statName={"attack-rate"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_attack_time.png"
-                value = {heroStats.attack_rate}/>
-                <Stat statName={"attack-range"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_attack_range.png"
-                value = {heroStats.attack_range}/>
-            </div>
-            <div className="col-wrapper defense">
-                <Stat statName={"armor"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_armor.png"
-                value = {Math.round(armor)}/>
-                <Stat statName={"mr"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_magic_resist.png"
-                value = {heroStats.base_mr}/>
-            </div>
-            <div className="col-wrapper mobility">
-                <Stat statName={"move-speed"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_movement_speed.png"
-                value = {heroStats.move_speed}/>
-                <Stat statName={"turn-rate"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_turn_rate.png"
-                value = {heroStats.turn_rate??"0.6"}/>
-                <Stat statName={"vision"} 
-                icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_vision.png"
-                value = {`${heroStats.day_vision}/${heroStats.night_vision}`}/>
+        <div className="stats">
+            <div className="stats-col-container">
+                <div className="col-wrapper attack">
+                    <Stat statName={"attack-dmg"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_damage.png"
+                    value = {`${attackDmgMin}-${attackDmgMax}`}/>
+                    <Stat statName={"attack-rate"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_attack_time.png"
+                    value = {heroStats.attack_rate}/>
+                    <Stat statName={"attack-range"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_attack_range.png"
+                    value = {heroStats.attack_range}/>
+                </div>
+                <div className="col-wrapper defense">
+                    <Stat statName={"armor"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_armor.png"
+                    value = {Math.round(armor)}/>
+                    <Stat statName={"mr"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_magic_resist.png"
+                    value = {heroStats.base_mr}/>
+                </div>
+                <div className="col-wrapper mobility">
+                    <Stat statName={"move-speed"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_movement_speed.png"
+                    value = {heroStats.move_speed}/>
+                    <Stat statName={"turn-rate"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_turn_rate.png"
+                    value = {heroStats.turn_rate??"0.6"}/>
+                    <Stat statName={"vision"} 
+                    icon = "https://cdn.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_vision.png"
+                    value = {`${heroStats.day_vision}/${heroStats.night_vision}`}/>
+                </div>
             </div>
             <div className="text-container">Roles</div>
         </div>
+        
     )
 }
 
